@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Embedded black box</title>
+</head>
+<body>
+    <div id="app">
+        <div id="slider">
+            <p id="slider-fps"></p>
+        </div>
+        <div id="leftArrow" class = "btn" onclick="previousFrame()"></div>
+        <div id="rightArrow" class = "btn" onclick="nextFrame()"></div>
+        <div id="animationCanvas"></div><br>
+        <div id="play" class = "btn" onclick="Play()"></div>
+        <div id="save" class = "btn" onclick="Save()"></div>
+        <div id="import" class = "btn" onclick="Import()"></div>
+        <div id="delete" class = "btn" onclick="setupFrames()"></div>
+        <div id="nextframes" class = "btn nonextframes" onclick="nextFrames()"></div><br>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+        <script src="./js/functions.js"></script>
+        <script src="./js/sketch.js"></script>
+    </div>
+</body>
+</html>
