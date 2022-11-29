@@ -1,3 +1,37 @@
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+});
+
+const lang = params.lang || 'en';
+
+const translations = {
+    'copy-to-clipboard': {
+        'en': 'Copy frames to clipboard ?',
+        'hy': 'Պատճենի ՛ր կադրերը',
+        'fr': 'Copier les images dans le presse-papier ?'
+    },
+    'few-frames': {
+        'en': 'Too few frames, you need to create 15 frames minimum',
+        'hy': 'Կադրերը շատ քիչ են: Պետք է առնվազն 15 կադր ստեղծես:',
+        'fr': 'Pas assez d\'images, tu dois en créer au minimum 15.'
+    },
+    'insert-data': {
+        'en': 'Insert your data here',
+        'hy': 'Insère tes données ici',
+        'fr': 'Մուտքագրի ՛ր տվյալներդ այստեղ'
+    },
+    'insert-error': {
+        'en': 'Something went wrong, try again !',
+        'hy': 'Տեղի ունեցավ սխալ',
+        'fr': 'Oups quelque chose s\'est mal passé'
+    },
+    'animation-speed': {
+        'en': 'Animation Speed',
+        'hy': 'Անիմացիայի արագությունը',
+        'fr': 'vitesse de l\'animation'
+    }
+};
+
 function copyToClipboard(str) { // Copy a string to the clipboard
     const el = document.createElement('textarea');
     el.value = str;
@@ -81,17 +115,17 @@ function Save() { // Save the animation
     let activeFramesCount = 0;
     for (let i in frames) if (frames[i].edited) activeFramesCount++;
     if (activeFramesCount >= 15) {
-        if (confirm("Copy frames to clipboard ?")) {
+        if (confirm(translations['copy-to-clipboard'][lang])) {
             copyToClipboard(JSON.stringify(frames));
         }
 
     }
-    else alert("Too few frames, you need to create 15 frames minimum");
+    else alert(translations['few-frames'][lang]);
 }
 
 function Import() { // Import an animation
     // Prompt for the animation
-    const res = prompt("Insert your data here");
+    const res = prompt(translations['insert-data'][lang]);
     try {
         if (!res) throw new Error('This error will be catched, baby.')
         frames = JSON.parse(res); // Parse the data
@@ -99,7 +133,7 @@ function Import() { // Import an animation
         currentFrame = 0; // Go to frame 0
     }
     catch (e) { // Wrong data was inserted
-        alert("Something went wrong, try again !");
+        alert(translations['insert-error'][lang]);
     }
 }
 

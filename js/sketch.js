@@ -53,7 +53,7 @@ function setup() {
 }
 
 function draw() {
-    FrameRateP.innerText = `Animation Speed: ${FrameRate.value()} FPS`;
+    FrameRateP.innerText = `${translations['animation-speed'][lang]}: ${FrameRate.value()} FPS`;
     if (!isAnimationPlaying) { // Edit mode
         frameRate(60); // FPS is always 60 in the edit mode
         drawFrames(currentFrame); // Draw the frames
