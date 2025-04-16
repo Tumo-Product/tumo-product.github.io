@@ -5,32 +5,37 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 const lang = params.lang || 'en';
 
 const translations = {
-    'copy-to-clipboard': {
-        'en': 'Copy frames to clipboard ?',
-        'hy': 'Պատճենի ՛ր կադրերը',
-        'fr': 'Copier les images dans le presse-papier ?'
+    "en": {
+        "copy_to_clipboard": "Copy frames to clipboard ?",
+        "few_frames": "Too few frames, you need to create 15 frames minimum",
+        "insert_data": "Insert your data here",
+        "insert_error": "Something went wrong, try again !",
+        "animation_speed": "Animation Speed",
     },
-    'few-frames': {
-        'en': 'Too few frames, you need to create 15 frames minimum',
-        'hy': 'Կադրերը շատ քիչ են: Պետք է առնվազն 15 կադր ստեղծես:',
-        'fr': 'Pas assez d\'images, tu dois en créer au minimum 15.'
+    "hy": {
+        "copy_to_clipboard": "Պատճենի ՛ր կադրերը",
+        "few_frames": "Կադրերը շատ քիչ են: Պետք է առնվազն 15 կադր ստեղծես:",
+        "insert_data": "Մուտքագրի ՛ր տվյալներդ այստեղ",
+        "insert_error": "Տեղի ունեցավ սխալ",
+        "animation_speed": "Անիմացիայի արագությունը",
     },
-    'insert-data': {
-        'en': 'Insert your data here',
-        'hy': 'Insère tes données ici',
-        'fr': 'Մուտքագրի ՛ր տվյալներդ այստեղ'
+    "fr": {
+        "copy_to_clipboard": "Copier les images dans le presse-papier ?",
+        "few_frames": "Pas assez d'images, tu dois en créer au minimum 15.",
+        "insert_data": "Insère tes données ici",
+        "insert_error": "Oups quelque chose s'est mal passé",
+        "animation_speed": "Vitesse de l'animation",
     },
-    'insert-error': {
-        'en': 'Something went wrong, try again !',
-        'hy': 'Տեղի ունեցավ սխալ',
-        'fr': 'Oups quelque chose s\'est mal passé'
+    "jp ": {
+        "copy_to_clipboard": "フレームをクリップボードにコピーしますか？",
+        "few_frames": "フレーム数が少なすぎます。最低15フレーム作成する必要があります。",
+        "insert_data": "ここにデータを挿入してください。",
+        "insert_error": "何かが間違っています！",
+        "animation_speed": "アニメーションのスピード",
     },
-    'animation-speed': {
-        'en': 'Animation Speed',
-        'hy': 'Անիմացիայի արագությունը',
-        'fr': 'vitesse de l\'animation'
-    }
 };
+
+const localizedText = translations[lang];
 
 function copyToClipboard(str) { // Copy a string to the clipboard
     const el = document.createElement('textarea');
@@ -115,17 +120,17 @@ function Save() { // Save the animation
     let activeFramesCount = 0;
     for (let i in frames) if (frames[i].edited) activeFramesCount++;
     if (activeFramesCount >= 15) {
-        if (confirm(translations['copy-to-clipboard'][lang])) {
+        if (confirm(localizedText['copy_to_clipboard'])) {
             copyToClipboard(JSON.stringify(frames));
         }
 
     }
-    else alert(translations['few-frames'][lang]);
+    else alert(localizedText['few_frames']);
 }
 
 function Import() { // Import an animation
     // Prompt for the animation
-    const res = prompt(translations['insert-data'][lang]);
+    const res = prompt(localizedText['insert_data']);
     try {
         if (!res) throw new Error('This error will be catched, baby.')
         frames = JSON.parse(res); // Parse the data
@@ -133,7 +138,7 @@ function Import() { // Import an animation
         currentFrame = 0; // Go to frame 0
     }
     catch (e) { // Wrong data was inserted
-        alert(translations['insert-error'][lang]);
+        alert(localizedText['insert_error']);
     }
 }
 
