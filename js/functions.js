@@ -26,7 +26,7 @@ const translations = {
         "insert_error": "Oups quelque chose s'est mal passé",
         "animation_speed": "Vitesse de l'animation",
     },
-    "jp ": {
+    "jp": {
         "copy_to_clipboard": "フレームをクリップボードにコピーしますか？",
         "few_frames": "フレーム数が少なすぎます。最低15フレーム作成する必要があります。",
         "insert_data": "ここにデータを挿入してください。",
